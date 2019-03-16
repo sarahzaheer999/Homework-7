@@ -1,0 +1,67 @@
+
+// This program has not adapted any existing programme whatsoever
+
+
+let song;
+
+function preload() {
+  song = loadSound('1.wav');
+}
+
+let boxes = [];
+
+function setup() {
+  createCanvas(400, 400);
+  var i = 0;
+  for (var a = 0.3; a < 15; a++) {
+    for (var b = 0.3; b < 15; b++) {
+      boxes[i] = new Box(a * 1.3 * 20, b * 1.3 * 20, 20, 20, 10, 10, 10);
+      i = i + 1;
+
+    }
+  }
+}
+
+function draw() {
+  background(255);
+  for (var i = 0; i < boxes.length; i++) {
+    // boxes[i].move();
+    boxes[i].show();
+  }
+}
+
+class Box {
+  constructor(x, y, w, h, r, g, b) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.R = r;
+    this.G = g;
+    this.B = b;
+  }
+
+  move() {
+    fill(this.R, this.G, this.B);
+
+  }
+
+  show() {
+    fill(this.R, this.G, this.B);
+    rect(this.x, this.y, this.w, this.h);
+  }
+}
+
+function mousePressed() {
+  for (var i = 0; i < boxes.length; i++) {
+    if (boxes[i].x <= mouseX && mouseX <= boxes[i].x + boxes[i].w && boxes[i].y <= mouseY && mouseY <= boxes[i].y + boxes[i].h) {
+      boxes[i].R = random(255);
+      boxes[i].G = random(255);
+      boxes[i].B = random(255);
+
+    }
+
+  }
+
+  song.play();
+}
